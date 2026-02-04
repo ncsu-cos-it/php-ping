@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Personal: Digital Signage</title>
+    <style>
+        /* Optional CSS to make the iframe fill the screen */
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+        }
+        iframe {
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            z-index: 999999;
+        }
+    </style>
+</head>
+<body>
+    <!-- The iframe that will display the different websites -->
+    <iframe id="myframe" src=""></iframe>
+
+    <script type="text/javascript">
+        // Array of URLs to cycle through
+	// (Does not work with php files)
+        var urlArray = [
+            'https://www4.stat.ncsu.edu/ping/stat-etf.html',
+            'https://esign.stat.ncsu.edu/clock/',
+            'https://www4.stat.ncsu.edu/ping/stat-staff.html',
+	    'https://wake.weatherstem.com/ncstate'
+        ];
+        var count = 0;
+        var iframe = document.getElementById('myframe');
+        // Set the time interval (e.g., 9000 milliseconds = 9 seconds)
+        var timer = setInterval(cycleTimer, 9000);
+
+        function nextUrl() {
+            // Get the current URL and increment the counter
+            var url = urlArray[count];
+            count++;
+            // Reset the counter to 0 if we reach the end of the array
+            if (count >= urlArray.length) {
+                count = 0;
+            }
+            return url;
+        }
+
+        function cycleTimer() {
+            // Change the iframe's source to the next URL in the array
+            iframe.src = nextUrl();
+        }
+
+        // Initial call to start the cycle immediately on page load
+        cycleTimer();
+    </script>
+</body>
+</html>
+
